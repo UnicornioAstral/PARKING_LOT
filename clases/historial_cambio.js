@@ -1,0 +1,23 @@
+
+
+-- -----------------------------------------------------
+-- Table mydb.HISTORIAL_CAMBIO
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS mydb.HISTORIAL_CAMBIO (
+  idHISTORIAL_CAMBIO INT NOT NULL,
+  estado ENUM('Activo', 'Inactivo') NOT NULL,
+  fecha_cambio DATE NOT NULL,
+  USUARIO_id INT NOT NULL,
+  ADMINISTRADOR_id INT NOT NULL,
+  PRIMARY KEY (idHISTORIAL_CAMBIO),
+  CONSTRAINT fk_HISTORIAL_CAMBIO_USUARIO
+    FOREIGN KEY (USUARIO_id)
+    REFERENCES mydb.USUARIO (id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+)
+ENGINE = InnoDB;
+
+
+CREATE INDEX fk_HISTORIAL_CAMBIO_USUARIO_idx ON mydb.HISTORIAL_CAMBIO (USUARIO_id ASC) VISIBLE;
